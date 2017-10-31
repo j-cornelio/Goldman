@@ -58,8 +58,6 @@ class App extends React.Component {
   };
 
   _respond = (response, idx) => {
-    console.log(response, idx);
-    console.log(this.state.questions[idx].answer.text);
     var s = this.state.score;
     if(this.state.questions[idx].answer.text === response){
       this.setState({score:  s += this.state.questions[idx].answer.points})
@@ -72,7 +70,7 @@ class App extends React.Component {
         <h2>{this.state.questions[0].header}</h2>
         <p>{this.state.questions[0].subhead}</p>
         {this.state.questions[0].quest.map( (item, idx) => {
-          return <button class="questionsButtons" onClick={this._respond.bind(this, item, 0)} key={idx}>{item}</button>
+          return <button className="questionsButtons" onClick={this._respond.bind(this, item, 0)} key={idx}>{item}</button>
         })}
       </div>
     )
@@ -84,7 +82,7 @@ class App extends React.Component {
         <h2>{this.state.questions[1].header}</h2>
         <p>{this.state.questions[1].subhead}</p>
         {this.state.questions[1].quest.map( (item, i) => {
-          return <button class="questionsButtons" onClick={this._respond.bind(this, item, 1)} key={i}>{item}</button>
+          return <button className="questionsButtons" onClick={this._respond.bind(this, item, 1)} key={i}>{item}</button>
         })}
       </div>
     )
@@ -96,7 +94,7 @@ class App extends React.Component {
         <h2>{this.state.questions[2].header}</h2>
         <p>{this.state.questions[2].subhead}</p>
         {this.state.questions[2].quest.map( (item, i) => {
-          return <button class="questionsButtons" onClick={this._respond.bind(this, item, 2)} key={i}>{item}</button>
+          return <button className="questionsButtons" onClick={this._respond.bind(this, item, 2)} key={i}>{item}</button>
         })}
       </div>
     )
@@ -108,7 +106,7 @@ class App extends React.Component {
         <h2>{this.state.questions[3].header}</h2>
         <p>{this.state.questions[3].subhead}</p>
         {this.state.questions[3].quest.map( (item, i) => {
-          return <button class="questionsButtons" onClick={this._respond.bind(this, item, 3)} key={i}>{item}</button>
+          return <button className="questionsButtons" onClick={this._respond.bind(this, item, 3)} key={i}>{item}</button>
         })}
       </div>
     )
@@ -116,6 +114,7 @@ class App extends React.Component {
 
   getStepContent(stepIndex) {
     switch (stepIndex) {
+
       case 0:
         return this._renderFirst();
       case 1:
@@ -136,12 +135,16 @@ class App extends React.Component {
     return (
       <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
         <MuiThemeProvider>
-          <p id="steps">Step {stepIndex + 1} of 4</p>
+
+          { (stepIndex < 4) ? <p id="steps">Step {stepIndex + 1} of 4</p> : null}
+
           <div style={contentStyle}>
             {finished ? (
               <div>
                 <h1>Your Total Score: {this.state.score}</h1>
+
                 { this.state.score > 50 ? <h1>CONGRATULATIONS</h1> : <p>please try again</p> }
+
                 <a
                   href="#"
                   onClick={(event) => {
