@@ -9,40 +9,43 @@ import RaisedButton     from 'material-ui/RaisedButton';
 import FlatButton       from 'material-ui/FlatButton';
 
 class App extends React.Component {
-  state = {
-    finished: false,
-    stepIndex: 0,
+  constructor(props){
+    super(props);
+    this.state = {
+      finished: false,
+      stepIndex: 0,
 
-    questions: [
-      {
-        header: 'What is JavaScript?', 
-        subhead: 'JavaScript simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy', 
-        quest: ['class based', 'Object oriented and dynamic', 'static', 'complied program'],
-        answer: {text: 'Object oriented and dynamic', points: 25}
-      },
-      {
-        header: 'What is React?', 
-        subhead: 'React simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy', 
-        quest: ['build', 'view layer', 'state management', 'framework'],
-        answer: {text: 'view layer', points: 25}
-      },
-      {
-        header: 'What is Redux?', 
-        subhead: 'Redux simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy', 
-        quest: ['React library', 'garden tool', 'state management library'],
-        answer: {text: 'state management library', points: 25}
-      },
-      {
-        header: 'What is CSS?', 
-        subhead: 'CSS simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy', 
-        quest: ['library', 'framework', 'API', 'language for styling'],
-        answer: {text: 'language for styling', points: 25}
-      }
-    ],
-    score: 0
-  };
+      questions: [
+        {
+          header: 'What is JavaScript?', 
+          subhead: 'JavaScript simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy', 
+          quest: ['class based', 'Object oriented and dynamic', 'static', 'complied program'],
+          answer: {text: 'Object oriented and dynamic', points: 25}
+        },
+        {
+          header: 'What is React?', 
+          subhead: 'React simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy', 
+          quest: ['build', 'view layer', 'state management', 'framework'],
+          answer: {text: 'view layer', points: 25}
+        },
+        {
+          header: 'What is Redux?', 
+          subhead: 'Redux simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy', 
+          quest: ['React library', 'garden tool', 'state management library'],
+          answer: {text: 'state management library', points: 25}
+        },
+        {
+          header: 'What is CSS?', 
+          subhead: 'CSS simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy', 
+          quest: ['library', 'framework', 'API', 'language for styling'],
+          answer: {text: 'language for styling', points: 25}
+        }
+      ],
+      score: 0
+    };
+  }
 
-  handleNext = () => {
+  handleNext(){
     const {stepIndex} = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
@@ -50,21 +53,21 @@ class App extends React.Component {
     });
   };
 
-  handlePrev = () => {
+  handlePrev(){
     const {stepIndex} = this.state;
     if (stepIndex > 0) {
       this.setState({stepIndex: stepIndex - 1});
     }
   };
 
-  _respond = (response, idx) => {
+  _respond(response, idx){
     var s = this.state.score;
     if(this.state.questions[idx].answer.text === response){
       this.setState({score:  s += this.state.questions[idx].answer.points})
     }
   }
 
-  _renderFirst = () => {
+  _renderFirst(){
     return (
       <div>
         <h2>{this.state.questions[0].header}</h2>
@@ -76,7 +79,7 @@ class App extends React.Component {
     )
   }
 
-  _renderSecond = () => {
+  _renderSecond(){
     return (
       <div>
         <h2>{this.state.questions[1].header}</h2>
@@ -88,7 +91,7 @@ class App extends React.Component {
     )
   }
 
-  _renderThird = () => {
+  _renderThird(){
     return (
       <div>
         <h2>{this.state.questions[2].header}</h2>
@@ -100,7 +103,7 @@ class App extends React.Component {
     )
   }
 
-  _renderFourth = () => {
+  _renderFourth(){
     return (
       <div>
         <h2>{this.state.questions[3].header}</h2>
@@ -158,9 +161,9 @@ class App extends React.Component {
             ) : (
               <div>
                 <div style={{marginTop: 12}}>
-                  <span onClick={this.handlePrev} id="prev"></span>
+                  <span onClick={this.handlePrev.bind(this)} id="prev"></span>
 
-                  <span onClick={this.handleNext} id="forward"></span>
+                  <span onClick={this.handleNext.bind(this)} id="forward"></span>
                 </div>
                 <div>{this.getStepContent(stepIndex)}</div>
               </div>

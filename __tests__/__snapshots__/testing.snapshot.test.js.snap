@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Todo component renders the todo correctly 1`] = `
+<div
+  style={
+    Object {
+      "margin": "auto",
+      "maxWidth": 700,
+      "width": "100%",
+    }
+  }
+>
+  <p
+    id="steps"
+  >
+    Step 
+    1
+     of 4
+  </p>
+  <div
+    style={
+      Object {
+        "margin": "0 16px",
+      }
+    }
+  >
+    <div>
+      <div
+        style={
+          Object {
+            "marginTop": 12,
+          }
+        }
+      >
+        <span
+          id="prev"
+          onClick={[Function]}
+        />
+        <span
+          id="forward"
+          onClick={[Function]}
+        />
+      </div>
+      <div>
+        <div>
+          <h2>
+            What is JavaScript?
+          </h2>
+          <p>
+            JavaScript simply is dummy Lorem Ipsum simply is dummy Lorem Ipsum simply is dummy
+          </p>
+          <button
+            className="questionsButtons"
+            onClick={[Function]}
+          >
+            class based
+          </button>
+          <button
+            className="questionsButtons"
+            onClick={[Function]}
+          >
+            Object oriented and dynamic
+          </button>
+          <button
+            className="questionsButtons"
+            onClick={[Function]}
+          >
+            static
+          </button>
+          <button
+            className="questionsButtons"
+            onClick={[Function]}
+          >
+            complied program
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
