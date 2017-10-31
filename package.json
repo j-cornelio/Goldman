@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "history": "^4.7.2",
+    "jest": "^21.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router": "^2.5.2",
@@ -12,7 +13,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-jest": "^21.2.0"
   }
 }
