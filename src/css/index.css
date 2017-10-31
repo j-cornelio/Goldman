@@ -3,3 +3,30 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+#prev {
+	background: url('../images/prev.jpg');
+	width: 33px;
+	height: 33px;
+	display: inline-block;
+}
+#forward {
+	background: url('../images/prev.jpg');
+	transform: rotate(180deg);
+	width: 33px;
+	height: 33px;
+	display: inline-block;
+	background-position: 0 -8px;
+	margin-left: 11px;
+}
+#steps {
+	float: right;
+}
+
+.questionsButtons {
+	padding: 12px;
+	margin-right: 8px;
+	border-radius: 8px;
+	background-color: #eee; 
+}
+

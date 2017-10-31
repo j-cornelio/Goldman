@@ -60,11 +60,10 @@ class App extends React.Component {
   _respond = (response, idx) => {
     console.log(response, idx);
     console.log(this.state.questions[idx].answer.text);
-
+    var s = this.state.score;
     if(this.state.questions[idx].answer.text === response){
-      this.setState({score: this.state.score += this.state.questions[idx].answer.points})
+      this.setState({score:  s += this.state.questions[idx].answer.points})
     }
-    console.log('SCORE: --------------------------> ', this.state.score);
   }
 
   _renderFirst = () => {
@@ -73,7 +72,7 @@ class App extends React.Component {
         <h2>{this.state.questions[0].header}</h2>
         <p>{this.state.questions[0].subhead}</p>
         {this.state.questions[0].quest.map( (item, idx) => {
-          return <button onClick={this._respond.bind(this, item, 0)} key={idx}>{item}</button>
+          return <button class="questionsButtons" onClick={this._respond.bind(this, item, 0)} key={idx}>{item}</button>
         })}
       </div>
     )
@@ -85,7 +84,7 @@ class App extends React.Component {
         <h2>{this.state.questions[1].header}</h2>
         <p>{this.state.questions[1].subhead}</p>
         {this.state.questions[1].quest.map( (item, i) => {
-          return <button onClick={this._respond.bind(this, item, 1)} key={i}>{item}</button>
+          return <button class="questionsButtons" onClick={this._respond.bind(this, item, 1)} key={i}>{item}</button>
         })}
       </div>
     )
@@ -97,7 +96,7 @@ class App extends React.Component {
         <h2>{this.state.questions[2].header}</h2>
         <p>{this.state.questions[2].subhead}</p>
         {this.state.questions[2].quest.map( (item, i) => {
-          return <button onClick={this._respond.bind(this, item, 2)} key={i}>{item}</button>
+          return <button class="questionsButtons" onClick={this._respond.bind(this, item, 2)} key={i}>{item}</button>
         })}
       </div>
     )
@@ -109,7 +108,7 @@ class App extends React.Component {
         <h2>{this.state.questions[3].header}</h2>
         <p>{this.state.questions[3].subhead}</p>
         {this.state.questions[3].quest.map( (item, i) => {
-          return <button onClick={this._respond.bind(this, item, 3)} key={i}>{item}</button>
+          return <button class="questionsButtons" onClick={this._respond.bind(this, item, 3)} key={i}>{item}</button>
         })}
       </div>
     )
@@ -126,7 +125,7 @@ class App extends React.Component {
       case 3:
         return this._renderFourth();
       default:
-        return this._renderFourth();
+        return this._renderFirst();
     }
   }
 //
@@ -137,17 +136,7 @@ class App extends React.Component {
     return (
       <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
         <MuiThemeProvider>
-          <Stepper activeStep={stepIndex}>
-            <Step>
-              <StepLabel></StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Create an ad group</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Create an ad</StepLabel>
-            </Step>
-          </Stepper>
+          <p id="steps">Step {stepIndex + 1} of 4</p>
           <div style={contentStyle}>
             {finished ? (
               <div>
@@ -165,20 +154,12 @@ class App extends React.Component {
               </div>
             ) : (
               <div>
-                <div>{this.getStepContent(stepIndex)}</div>
                 <div style={{marginTop: 12}}>
-                  <FlatButton
-                    label="Back"
-                    disabled={stepIndex === 0}
-                    onClick={this.handlePrev}
-                    style={{marginRight: 12}}
-                  />
-                  <RaisedButton
-                    label={stepIndex === 3 ? 'Finish' : 'Next'}
-                    primary={true}
-                    onClick={this.handleNext}
-                  />
+                  <span onClick={this.handlePrev} id="prev"></span>
+
+                  <span onClick={this.handleNext} id="forward"></span>
                 </div>
+                <div>{this.getStepContent(stepIndex)}</div>
               </div>
             )}
           </div>
