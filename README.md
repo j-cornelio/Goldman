@@ -1,6 +1,7 @@
 
 
-uses Material UI 
+git clone
 
-npm install material-ui --save-dev 
+cd Goldman, npm install
 
+npm start
