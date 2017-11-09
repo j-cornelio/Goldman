@@ -41,7 +41,9 @@ class App extends React.Component {
           answer: {text: 'language for styling', points: 25}
         }
       ],
-      score: 0
+      score: 0,
+
+      data: [{text: 'AAAAAAAAAAAA'}, {text: 'BBBBBBBBBBBBBBB'}, {text: 'CCCCC'}, {text: 'DDDDDDDDDDDDDDDDDDDDDDDDDDDD'}] 
     };
   }
 
@@ -67,70 +69,29 @@ class App extends React.Component {
     }
   }
 
-  _renderFirst(){
+  _renderSteps(index){
     return (
       <div>
-        <h2>{this.state.questions[0].header}</h2>
-        <p>{this.state.questions[0].subhead}</p>
-        {this.state.questions[0].quest.map( (item, idx) => {
-          return <button className="questionsButtons" onClick={this._respond.bind(this, item, 0)} key={idx}>{item}</button>
+        <h2>{this.state.questions[index].header}</h2>
+        <p>{this.state.questions[index].subhead}</p>
+        {this.state.questions[index].quest.map( (item, i) => {
+          return <button className="questionsButtons" onClick={this._respond.bind(this, item, i)} key={i}>{item}</button>
         })}
       </div>
     )
   }
 
-  _renderSecond(){
-    return (
-      <div>
-        <h2>{this.state.questions[1].header}</h2>
-        <p>{this.state.questions[1].subhead}</p>
-        {this.state.questions[1].quest.map( (item, i) => {
-          return <button className="questionsButtons" onClick={this._respond.bind(this, item, 1)} key={i}>{item}</button>
-        })}
-      </div>
-    )
+  _getStepContent(stepIndex) {
+    var element = null;
+    this.state.questions.forEach( (item, idx) => {
+      if(stepIndex === idx){
+        element = this._renderSteps(stepIndex)
+      }
+    })
+
+    return element;
   }
 
-  _renderThird(){
-    return (
-      <div>
-        <h2>{this.state.questions[2].header}</h2>
-        <p>{this.state.questions[2].subhead}</p>
-        {this.state.questions[2].quest.map( (item, i) => {
-          return <button className="questionsButtons" onClick={this._respond.bind(this, item, 2)} key={i}>{item}</button>
-        })}
-      </div>
-    )
-  }
-
-  _renderFourth(){
-    return (
-      <div>
-        <h2>{this.state.questions[3].header}</h2>
-        <p>{this.state.questions[3].subhead}</p>
-        {this.state.questions[3].quest.map( (item, i) => {
-          return <button className="questionsButtons" onClick={this._respond.bind(this, item, 3)} key={i}>{item}</button>
-        })}
-      </div>
-    )
-  }
-
-  getStepContent(stepIndex) {
-    switch (stepIndex) {
-
-      case 0:
-        return this._renderFirst();
-      case 1:
-        return this._renderSecond();
-      case 2:
-        return this._renderThird();
-      case 3:
-        return this._renderFourth();
-      default:
-        return this._renderFirst();
-    }
-  }
-//
   render() {
     const { finished, stepIndex } = this.state,
           contentStyle            = {margin: '0 16px'};
@@ -165,7 +126,7 @@ class App extends React.Component {
 
                   <span onClick={this.handleNext.bind(this)} id="forward"></span>
                 </div>
-                <div>{this.getStepContent(stepIndex)}</div>
+                <div>{this._getStepContent(stepIndex)}</div>
               </div>
             )}
           </div>
