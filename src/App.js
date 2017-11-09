@@ -9,17 +9,16 @@ class App extends React.Component {
     this.state = {
       finished    : false,
       stepIndex   : 0,
-
-      questions,
-      score: 0
+      score       : 0,
+      questions
     };
   }
 
   handleNext(){
     const {stepIndex} = this.state;
     this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 3,
+      stepIndex : stepIndex + 1,
+      finished  : stepIndex >= 3,
     });
   };
 
