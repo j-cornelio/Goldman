@@ -62,12 +62,13 @@ class App extends React.Component {
   }
 
   _renderSteps(index){
+    const { questions } = this.state;
     return (
       <div>
-        <h2>{this.state.questions[index].header}</h2>
-        <p>{this.state.questions[index].subhead}</p>
-        {this.state.questions[index].quest.map( (item, i) => {
-          return <button className="questionsButtons" onClick={this._respond.bind(this, item, i)} key={i}>{item}</button>
+        <h2>{questions[index].header}</h2>
+        <p>{questions[index].subhead}</p>
+        {questions[index].quest.map( (item, i) => {
+            return <button className="questionsButtons" onClick={this._respond.bind(this, item, i)} key={i}>{item}</button>
         })}
       </div>
     )
