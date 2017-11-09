@@ -1,10 +1,4 @@
 import React            from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {
-  Step,
-  Stepper,
-  StepLabel,
-} from 'material-ui/Stepper';
 import RaisedButton     from 'material-ui/RaisedButton';
 import FlatButton       from 'material-ui/FlatButton';
 
@@ -41,9 +35,7 @@ class App extends React.Component {
           answer: {text: 'language for styling', points: 25}
         }
       ],
-      score: 0,
-
-      data: [{text: 'AAAAAAAAAAAA'}, {text: 'BBBBBBBBBBBBBBB'}, {text: 'CCCCC'}, {text: 'DDDDDDDDDDDDDDDDDDDDDDDDDDDD'}] 
+      score: 0
     };
   }
 
@@ -98,7 +90,6 @@ class App extends React.Component {
 
     return (
       <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
-        <MuiThemeProvider>
 
           { (stepIndex < 4) ? <p id="steps">Step {stepIndex + 1} of 4</p> : null}
 
@@ -130,7 +121,6 @@ class App extends React.Component {
               </div>
             )}
           </div>
-        </MuiThemeProvider>
       </div>
     );
   }
