@@ -1,15 +1,16 @@
 import React            from 'react';
-import questions        from '../data/questions';
+import PropTypes        from 'prop-types';
+import LoaderHOC        from '../HOC/LoaderHOC';
 
-class App extends React.Component {
+class Questions extends React.Component {
   constructor(props){
     super(props);
-    
+
     this.state = {
       finished    : false,
       stepIndex   : 0,
       score       : 0,
-      questions
+      questions   : this.props.questions || []
     };
   }
 
@@ -75,15 +76,13 @@ class App extends React.Component {
 
                 { this.state.score > 50 ? <h1>CONGRATULATIONS</h1> : <p>please try again</p> }
 
-                <a
-                  href="/"
-                  onClick={(event) => {
+                <button onClick={(event) => {
                     event.preventDefault();
                     this.setState({stepIndex: 0, finished: false, score: 0});
                   }}
                 >
                   Reset test
-                </a>
+                </button>
               </div>
             ) : (
               <div>
@@ -100,4 +99,8 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default LoaderHOC('questions')(Questions);
+
+Questions.propTypes = {
+  questions: PropTypes.array,
+};
