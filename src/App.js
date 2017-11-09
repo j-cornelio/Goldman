@@ -48,16 +48,16 @@ class App extends React.Component {
   };
 
   handlePrev(){
-    const {stepIndex} = this.state;
+    const { stepIndex } = this.state;
     if (stepIndex > 0) {
       this.setState({stepIndex: stepIndex - 1});
     }
   };
 
   _respond(response, idx){
-    var s = this.state.score;
+    var { score } = this.state;
     if(this.state.questions[idx].answer.text === response){
-      this.setState({score:  s += this.state.questions[idx].answer.points})
+      this.setState({score:  score += this.state.questions[idx].answer.points})
     }
   }
 
