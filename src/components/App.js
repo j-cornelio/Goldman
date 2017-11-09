@@ -1,26 +1,103 @@
-import React from 'react';
-// Link component is just anchor to match it's path and Route path to load JSX UI Component in prop.children
+import React            from 'react';
+import questions        from '../data/questions';
 
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    
+    this.state = {
+      finished    : false,
+      stepIndex   : 0,
+      score       : 0,
+      questions
+    };
+  }
 
-const App = (props) => {
-  return (
-    <div className="container">
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <a className="navbar-brand" href="#">Tutorial part 2</a>
+  handleNext(){
+    const {stepIndex} = this.state;
+    this.setState({
+      stepIndex : stepIndex + 1,
+      finished  : stepIndex >= 3,
+    });
+  };
+
+  handlePrev(){
+    const { stepIndex } = this.state;
+    if (stepIndex > 0) {
+      this.setState({stepIndex: stepIndex - 1});
+    }
+  };
+
+  _respond(response, idx){
+    var { score } = this.state;
+    if(this.state.questions[idx].answer.text === response){
+      this.setState({score:  score += this.state.questions[idx].answer.points})
+    }
+  }
+
+  _renderSteps(index){
+    const { questions } = this.state;
+    return (
+      <div>
+        <h2>{questions[index].header}</h2>
+        <p>{questions[index].subhead}</p>
+        {questions[index].quest.map( (item, i) => {
+            return <button className="questionsButtons" onClick={this._respond.bind(this, item, i)} key={i}>{item}</button>
+        })}
+      </div>
+    )
+  }
+
+  _getStepContent(stepIndex) {
+    var element = null;
+    this.state.questions.forEach( (item, idx) => {
+      if(stepIndex === idx){
+        element = this._renderSteps(stepIndex)
+      }
+    })
+
+    return element;
+  }
+
+  render() {
+    const { finished, stepIndex } = this.state,
+          contentStyle            = {margin: '0 16px'};
+
+    return (
+      <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
+
+          { (stepIndex < 4) ? <p id="steps">Step {stepIndex + 1} of 4</p> : null}
+
+          <div style={contentStyle}>
+            {finished ? (
+              <div>
+                <h1>Your Total Score: {this.state.score}</h1>
+
+                { this.state.score > 50 ? <h1>CONGRATULATIONS</h1> : <p>please try again</p> }
+
+                <a
+                  href="/"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    this.setState({stepIndex: 0, finished: false, score: 0});
+                  }}
+                >
+                  Reset test
+                </a>
+              </div>
+            ) : (
+              <div>
+                <div style={{marginTop: 12}}>
+                  <span onClick={this.handlePrev.bind(this)} id="prev"></span>
+
+                  <span onClick={this.handleNext.bind(this)} id="forward"></span>
+                </div>
+                <div>{this._getStepContent(stepIndex)}</div>
+              </div>
+            )}
           </div>
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav">
-              <li><Link to="/">Home</Link></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      {/* load components like composition */}
-    </div>
-  )
+      </div>
+    );
+  }
 }
-
 export default App;
-

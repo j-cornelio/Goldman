@@ -3,9 +3,10 @@ import RaisedButton     from 'material-ui/RaisedButton';
 import FlatButton       from 'material-ui/FlatButton';
 import questions        from './data/questions';
 
-class App extends React.Component {
+class Questions extends React.Component {
   constructor(props){
     super(props);
+
     this.state = {
       finished    : false,
       stepIndex   : 0,
@@ -101,4 +102,4 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default Questions;
